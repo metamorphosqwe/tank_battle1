@@ -70,16 +70,7 @@ void wait_for_keypress() {
 #ifdef _WIN32
     _getch();
 #else
-    // Для Linux требуется настройка терминала
-    struct termios oldt, newt;
-    tcgetattr(STDIN_FILENO, &oldt);
-    newt = oldt;
-    newt.c_lflag &= ~(ICANON | ECHO);
-    tcsetattr(STDIN_FILENO, TCSANOW, &newt);
-    
-    getchar();
-    
-    tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
+
 #endif
 }
 
